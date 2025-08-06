@@ -8,4 +8,4 @@
 
 <div class="bg-pink-100">{@render children()}</div>
 
-<div class="bg-green-200 text-center">this is the footer</div>
+<div class="bg-green-200 text-center">this is the footer, check out <a href="/about">ABOUT</a></div>
