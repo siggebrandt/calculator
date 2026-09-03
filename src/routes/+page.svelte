@@ -1,12 +1,13 @@
 <script>
-	let inputtedExpression = ''; // synkas automatiskt med inputField
+	let inputtedExpression = ''; // binded
+	$: console.log('Nytt värde:', inputtedExpression); // Reaktiva statement --- /* Använd på preview senare */
 
 	function addToExpression(input) {
 		inputtedExpression += input;
 	}
 	async function calculate() {
 		console.log(inputtedExpression);
-		const response = await fetch(`${document.URL}/api/calc`, {
+		const response = await fetch(`${document.URL}api/calc`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({ inputtedExpression })
@@ -22,6 +23,7 @@
 </div>
 
 <input bind:value={inputtedExpression} id="inputField" class="bg-green-100 border ml-5" />
+<span id="expressionPreview" class="bg-lime-300 italic">preview</span>
 <button class="bg-pink-500 text-white px-5 ms-5 ml-5" on:click={calculate}>calc</button>
 
 <hr class="m-2" />
