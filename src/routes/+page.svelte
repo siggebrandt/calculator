@@ -1,6 +1,9 @@
 <script>
 	let inputtedExpression = ''; // binded
-	$: console.log('Nytt värde:', inputtedExpression); // Reaktiva statement --- /* Använd på preview senare */
+	$: {
+		console.log('Nytt värde:', inputtedExpression); // Reaktiva statement --- /* Använd på preview senare */
+		/* document.querySelector(expressionPreview).textContent  -- detta funkar ej*/
+	}
 
 	function addToExpression(input) {
 		inputtedExpression += input;
