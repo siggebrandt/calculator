@@ -17,6 +17,8 @@
 			body: JSON.stringify({ inputtedExpression })
 		});
 	}
+
+	// when any key pressed (except numbers), write in the input.
 </script>
 
 <div class="text-right mr-5">

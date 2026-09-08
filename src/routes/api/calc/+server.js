@@ -7,9 +7,11 @@ export async function POST({ request }) {
 		return json({ error: 'Uttrycket saknas' }, { status: 400 });
 	}
 
-	const expressionValue = calc(inputtedExpression);
+	const expressionValue = Number(inputtedExpression);
+
+	// hantera o omvandla för NUmber funkar EJ i sammanhanget, så hitta "'+', '-', '×', '÷'" o omvandla samt hantera alla matematiska funktioner
 
 	console.log(expressionValue);
 
-	return json({ expressionValue }, { status: 400 });
+	return json({ expressionValue }, { status: 200 });
 }
