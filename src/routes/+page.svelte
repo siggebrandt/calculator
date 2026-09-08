@@ -1,7 +1,7 @@
 <script>
 	let inputtedExpression = ''; // binded
 	$: {
-		console.log('Nytt värde:', inputtedExpression); // Reaktiva statement --- /* Använd på preview senare */
+		console.log(inputtedExpression); // Reaktiva statement --- /* Använd på preview senare */
 		/* document.querySelector(expressionPreview).textContent  -- detta funkar ej*/
 	}
 
@@ -9,8 +9,9 @@
 		inputtedExpression += input;
 	}
 	async function calculate() {
-		console.log(inputtedExpression);
-		const response = await fetch(`${document.URL}api/calc`, {
+		// skickar till APIn som hanterar requesten
+		console.log('expression:', inputtedExpression);
+		const response = await fetch(`/api/calc`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({ inputtedExpression })
