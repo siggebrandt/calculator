@@ -9,7 +9,7 @@ export async function POST({ request }) {
 
 	const expressionValue = Number(inputtedExpression);
 
-	// hantera o omvandla för NUmber funkar EJ i sammanhanget, så hitta "'+', '-', '×', '÷'" o omvandla samt hantera alla matematiska funktioner
+	// hantera o omvandla för Number funkar EJ i sammanhanget, så hitta "'+', '-', '×', '÷'" o omvandla samt hantera alla matematiska funktioner
 
 	console.log(expressionValue);
 

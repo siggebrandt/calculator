@@ -28,7 +28,12 @@
 	</p>
 </div>
 
-<input bind:value={inputtedExpression} id="inputField" class="bg-green-100 border ml-5" />
+<input
+	bind:value={inputtedExpression}
+	id="inputField"
+	type="number"
+	class="bg-green-100 border ml-5"
+/>
 <span id="expressionPreview" class="bg-lime-300 italic">preview</span>
 <button class="bg-pink-500 text-white px-5 ms-5 ml-5" on:click={calculate}>calc</button>
 
