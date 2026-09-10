@@ -11,6 +11,8 @@ export async function POST({ request }) {
 
 	// hantera o omvandla för Number funkar EJ i sammanhanget, så hitta "'+', '-', '×', '÷'" o omvandla samt hantera alla matematiska funktioner
 
+	console.log(request);
+
 	console.log(expressionValue);
 
 	return json({ expressionValue }, { status: 200 });

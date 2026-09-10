@@ -1,3 +1,8 @@
+<!-- TO DO
+  -- when any key pressed (except numbers), write in the input.
+  -- 
+  -->
+
 <script>
 	let inputtedExpression = ''; // binded
 	$: {
@@ -17,41 +22,32 @@
 			body: JSON.stringify({ inputtedExpression })
 		});
 	}
-
-	// when any key pressed (except numbers), write in the input.
 </script>
 
-<div class="text-right mr-5">
-	<h1>Welcome to SvelteKit</h1>
-	<p>
-		Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation
-	</p>
+<div class="flex">
+	<div id="calculatorResult" class="flex-1">
+		<input bind:value={inputtedExpression} id="inputField" class="bg-green-100 border ml-5" />
+		<span id="expressionPreview" class="bg-lime-300 italic">preview</span>
+		<button class="bg-pink-500 text-white px-5 ms-5 ml-5" on:click={calculate}>calc</button>
+	</div>
+	<div id="calculatorButtons" class="flex-1">
+		<div id="calculatorButtonsNumbers" class="grid grid-cols-3 grid-rows-3 gap-x-4 gap-y-2">
+			{#each [9, 8, 7, 6, 5, 4, 3, 2, 1, 0] as buttonNumber}
+				<button
+					class="bg-orange-200 text-white aspect-square rounded-xl"
+					on:click={() => addToExpression(buttonNumber)}>{buttonNumber}</button
+				>
+			{/each}
+		</div>
+	</div>
 </div>
-
-<input
-	bind:value={inputtedExpression}
-	id="inputField"
-	type="number"
-	class="bg-green-100 border ml-5"
-/>
-<span id="expressionPreview" class="bg-lime-300 italic">preview</span>
-<button class="bg-pink-500 text-white px-5 ms-5 ml-5" on:click={calculate}>calc</button>
-
-<hr class="m-2" />
-
-<div id="calculatorButtons" class="text-center">
-	<!-- borde vara flex istället för center text-->
-	{#each [9, 8, 7, 6, 5, 4, 3, 2, 1, 0] as buttonNumber}
-		<button class="bg-pink-700 text-white px-5 ms-5" on:click={() => addToExpression(buttonNumber)}
-			>{buttonNumber}</button
-		>
-	{/each}
-	<br class="mb-4" />
-	{#each ['+', '-', '×', '÷'] as handler}
-		<button class="bg-pink-700 text-white px-5 ms-5" on:click={() => addToExpression(handler)}
-			>{handler}</button
-		>
-	{/each}
+<div class="flex">
+	<div id="calculatorButtonsOperators" class="flex-1">
+		{#each ['+', '-', '×', '÷'] as handler}
+			<button
+				class="bg-orange-500 text-white px-5 ms-5 aspect-[5/3]"
+				on:click={() => addToExpression(handler)}>{handler}</button
+			>
+		{/each}
+	</div>
 </div>
-
-<hr class="m-2" />
