@@ -1,6 +1,7 @@
 import { json } from '@sveltejs/kit';
 import * as math from 'mathjs';
 import { evaluate } from 'mathjs';
+import { calculate } from '$lib/calculate.js';
 
 export async function POST({ request }) {
 	const requestBody = await request.json();
@@ -10,11 +11,12 @@ export async function POST({ request }) {
 	} // IF EMPTY
 
 	/* management of mathematical expressions */
-	const expression = requestBody.inputtedExpression
+	const result = calculate(requestBody.inputtedExpression);
+	/* const expression = requestBody.inputtedExpression
 		.replaceAll('×', '*')
 		.replaceAll('÷', '/')
 		.replaceAll(',', '.');
 
-	const result = Number(evaluate(expression));
+	const result = Number(evaluate(expression)); */
 	return json({ result }, { status: 200 });
 }
