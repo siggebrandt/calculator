@@ -8,16 +8,19 @@
   -->
 
 <script>
+	import { calculate } from '$lib/calculate.js';
+
 	let inputtedExpression = ''; // binded
 	$: {
 		console.log(inputtedExpression); // Reaktiva statement --- /* Använd på preview senare */
+		// ---- calculate(inputtedExpression); -----
 		/* document.querySelector(expressionPreview).textContent  -- detta funkar ej*/
 	}
 
 	function addToExpression(input) {
 		inputtedExpression += input;
 	}
-	async function calculate() {
+	async function calculateExpression() {
 		const response = await fetch(`/api/calc`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
@@ -36,7 +39,9 @@
 	<div id="calculatorResult" class="flex-1">
 		<input bind:value={inputtedExpression} id="inputField" class="bg-green-100 border ml-5" />
 		<span id="expressionPreview" class="bg-lime-300 italic">preview</span>
-		<button class="bg-pink-500 text-white px-5 ms-5 ml-5" on:click={calculate}>calc</button>
+		<button class="bg-pink-500 text-white px-5 ms-5 ml-5" on:click={calculateExpression}
+			>calc</button
+		>
 	</div>
 	<div id="calculatorButtons" class="flex-1">
 		<div id="calculatorButtonsNumbers" class="grid grid-cols-3 grid-rows-3 gap-x-4 gap-y-2">
