@@ -1,19 +1,20 @@
 import { json } from '@sveltejs/kit';
+import * as math from 'mathjs';
+import { evaluate } from 'mathjs';
 
 export async function POST({ request }) {
-	const { inputtedExpression } = await request.json();
+	const requestBody = await request.json();
 
-	if (!inputtedExpression) {
+	if (!requestBody.inputtedExpression) {
 		return json({ error: 'Uttrycket saknas' }, { status: 400 });
-	}
+	} // IF EMPTY
 
-	const expressionValue = Number(inputtedExpression);
+	/* management of mathematical expressions */
+	const expression = requestBody.inputtedExpression
+		.replaceAll('×', '*')
+		.replaceAll('÷', '/')
+		.replaceAll(',', '.');
 
-	// hantera o omvandla för Number funkar EJ i sammanhanget, så hitta "'+', '-', '×', '÷'" o omvandla samt hantera alla matematiska funktioner
-
-	console.log(request);
-
-	console.log(expressionValue);
-
-	return json({ expressionValue }, { status: 200 });
+	const result = Number(evaluate(expression));
+	return json({ result }, { status: 200 });
 }

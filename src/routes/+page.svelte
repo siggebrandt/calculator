@@ -1,6 +1,10 @@
 <!-- TO DO
   -- when any key pressed (except numbers), write in the input.
-  -- 
+  -- hantering av tom calculation
+  -- använding av reaktiva statement
+  -- design
+  -- about page
+  -- slugs
   -->
 
 <script>
@@ -14,13 +18,17 @@
 		inputtedExpression += input;
 	}
 	async function calculate() {
-		// skickar till APIn som hanterar requesten
-		console.log('expression:', inputtedExpression);
 		const response = await fetch(`/api/calc`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({ inputtedExpression })
 		});
+		const data = await response.json();
+		if (!response.ok) {
+			console.error(data.error);
+			return;
+		}
+		inputtedExpression = data.result;
 	}
 </script>
 
