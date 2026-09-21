@@ -10,7 +10,7 @@
 <script>
 	import { calculate } from '$lib/calculate.js';
 
-	let inputtedExpression = ''; // binded
+	let inputtedExpression = ''; // bound value to inputField.
 	$: {
 		console.log(inputtedExpression); // Reaktiva statement --- /* Använd på preview senare */
 		// ---- calculate(inputtedExpression); -----
@@ -18,20 +18,24 @@
 	}
 
 	function addToExpression(input) {
-		inputtedExpression += input;
+		inputtedExpression += String(input);
 	}
 	async function calculateExpression() {
 		const response = await fetch(`/api/calc`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({ inputtedExpression })
+			body: JSON.stringify(inputtedExpression)
 		});
-		const data = await response.json();
-		if (!response.ok) {
-			console.error(data.error);
+		try {
+			const data = await response.json();
+			inputtedExpression = data;
+		} catch {
+			alert(data.error);
 			return;
 		}
-		inputtedExpression = data.result;
+
+		if (!response.ok) {
+		}
 	}
 </script>
 
@@ -58,7 +62,7 @@
 	<div id="calculatorButtonsOperators" class="flex-1">
 		{#each ['+', '-', '×', '÷'] as handler}
 			<button
-				class="bg-orange-500 text-white px-5 ms-5 aspect-[5/3]"
+				class="bg-orange-500 text-white px-5 ms-5 aspect-5/3"
 				on:click={() => addToExpression(handler)}>{handler}</button
 			>
 		{/each}

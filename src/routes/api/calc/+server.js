@@ -5,9 +5,11 @@ import { calculate } from '$lib/calculate.js';
 
 export async function POST({ request }) {
 	const requestBody = await request.json();
-
-	if (!requestBody.inputtedExpression) {
-		return json({ error: 'Uttrycket saknas' }, { status: 400 });
+	if (!requestBody) {
+		return json(0, { status: 400 });
+	}
+	if (requestBody == 0) {
+		return json(0, { status: 200 });
 	} // IF EMPTY
 
 	/* management of mathematical expressions */
@@ -18,5 +20,5 @@ export async function POST({ request }) {
 		.replaceAll(',', '.');
 
 	const result = Number(evaluate(expression)); */
-	return json({ result }, { status: 200 });
+	return json(result, { status: 200 });
 }
