@@ -33,9 +33,6 @@
 			alert(data.error);
 			return;
 		}
-
-		if (!response.ok) {
-		}
 	}
 </script>
 

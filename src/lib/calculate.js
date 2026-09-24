@@ -3,11 +3,15 @@ import { evaluate } from 'mathjs';
 
 export function calculate(expression) {
 	try {
-		return Number(
+		const result = Number(
 			evaluate(expression.replaceAll('×', '*').replaceAll('÷', '/').replaceAll(',', '.'))
 		);
-	} catch {
-		console.error('failed calculation;', expression);
+		if (!Number.isFinite(result)) {
+			return 0;
+		}
+		return result;
+	} catch (e) {
+		console.error(`Failed calculation: ${expression}`, e);
 		return 0;
 	}
 }

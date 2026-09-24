@@ -5,12 +5,9 @@ import { calculate } from '$lib/calculate.js';
 
 export async function POST({ request }) {
 	const requestBody = await request.json();
-	if (!requestBody) {
-		return json(0, { status: 400 });
-	}
-	if (requestBody == 0) {
+	if (!requestBody || requestBody == 0) {
 		return json(0, { status: 200 });
-	} // IF EMPTY
+	}
 
 	/* management of mathematical expressions */
 	const result = calculate(requestBody.inputtedExpression);
