@@ -9,6 +9,9 @@ export function calculate(expression) {
 		if (!Number.isFinite(result)) {
 			return 0;
 		}
+		if (result === undefined) {
+			return 0;
+		}
 		return result;
 	} catch (e) {
 		console.error(`Failed calculation: ${expression}`, e);
